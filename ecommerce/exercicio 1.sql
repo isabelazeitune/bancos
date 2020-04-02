@@ -1,0 +1,33 @@
+use ecommerce;
+
+-- TAREFAS
+
+-- 1. TRAGA EM UMA CONSULTA TODOS OS CLIENTES E OS ENDEREÇOS QUE ELES POSSUEM
+SELECT * FROM tb_cliente
+	LEFT JOIN tb_cliente_endereco
+		ON tb_cliente.ID_CLIENTE = tb_cliente_endereco.ID_CLIENTE;
+
+-- 2. TRAGA OS 5 PRIMEIROS PRODUTOS DA CADASTRADOS COM O NOME DE SEUS FORNECEDORES
+SELECT * FROM tb_produto prod
+	INNER JOIN tb_fornecedor forn
+		ON prod.ID_FORNECEDOR = forn.ID_FORNECEDOR
+			LIMIT 5;
+            
+-- 3. TRAGA TODOS OS FORNECEDORES QUE POSSUEM A CATEGORIA COMO A (Sem usar o ID_FORNECEDOR_CATEGORIA no WHERE)
+SELECT * FROM tb_fornecedor f
+	INNER JOIN tb_fornecedor_categoria fc
+		ON f.ID_FORNECEDOR_CATEGORIA = fc.ID_FORNECEDOR_CATEGORIA
+			WHERE fc.ds_nome = "a";
+
+-- 4. TRAGA OS 3 PRIMEIROS PEDIDOS CADASTRADOS E O NOME DE SEUS RESPECTIVOS PRODUTOS
+SELECT * FROM tb_pedido pe
+	INNER JOIN tb_pedido_detalhe pd
+		ON pe.ID_PEDIDO = pd.ID_PEDIDO
+			INNER JOIN tb_produto pr
+				ON pd.ID_PRODUTO = pr.ID_PRODUTO
+-- 				WHERE pe.ID_PEDIDO <= 3
+                    ;
+        
+-- 5. TRAZER OS NOMES DE TODOS OS PRODUTOS COMPRADOS POR 5 CLIENTES
+-- SELECT * FROM tb_pedido
+--	INNER JOIN tb_cliente;
